@@ -1,22 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, Link } from 'react-router-dom';
 import '../styling/App.css';
+import { Login } from '../components/LoginForm';
+import { Signup } from '../components/SignupForm';
+// import loginFormSchema from '../validation/loginFormSchema';
+// import signupFormSchema from '../validation/signupFormSchema';
+import axios from 'axios';
+import * as yup from 'yup';
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          VIRTUAL REALITY FUNDING PLATFORM II
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Login />
+      <Signup />
     </div>
   );
 }
