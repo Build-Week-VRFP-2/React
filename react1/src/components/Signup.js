@@ -7,6 +7,10 @@ export const Signup = () => {
     username: "",
     password: "",
   });
+
+  const [investor, setInvestor] = useState(false);
+  const [applicant, setApplicant] = useState(false);
+
   const handleChanges = (e) => {
     setCreds({
       ...creds,
@@ -14,13 +18,25 @@ export const Signup = () => {
     });
   };
 
+
+  const handleToggleI = e => {
+    setApplicant(false)
+    setInvestor(true)
+  }
+
+  const handleToggleA = e => {
+    setInvestor(false)
+    setApplicant(true)
+  }
+
+
   return (
     <div className="signup">
       <div>
-        <ul className='links'>
+        <ul className="links">
           <li>
-            <Link to="/signup/investor">investor</Link>
-            <Link to="/signup/applicant">applicant</Link>
+            <Link onClick={handleToggleI} className={investor ? 'toggleOn': 'toggleOff'} to="/signup/investor">investor</Link>
+            <Link onClick={handleToggleA} className={applicant ? 'toggleOn': 'toggleOff'} to="/signup/applicant">applicant</Link>
           </li>
         </ul>
       </div>
