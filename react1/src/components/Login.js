@@ -34,7 +34,7 @@ export const Login = () => {
           value={Lcreds.password}
           onChange={handleChanges}
         />
-        <button>submit</button>
+        <button>SUBMIT</button>
         <span> Don't have an account?</span> <Link className='Log' to="/signup">sign up here</Link>
       </form>
     </div>

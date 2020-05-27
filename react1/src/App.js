@@ -17,7 +17,7 @@ function App() {
           <Route path="/signup" component={Signup} />
           <Route path="/signup/investor" component={InvestorSignIn} />
           <Route path="/signup/applicant" component={ApplicantSignIn} />
-          )} 
+          {/* )}  */}
         </Switch>
       </div>
     </Router>

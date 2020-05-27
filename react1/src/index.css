@@ -45,7 +45,8 @@ button {
   font-family: "Raleway", sans-serif;
   margin-top: 40px;
   background: teal;
-  border-radius: 100px;
+  border-radius: 10px;
+  letter-spacing: 1px;
 }
 
 .signup {

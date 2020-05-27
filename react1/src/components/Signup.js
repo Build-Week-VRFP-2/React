@@ -60,7 +60,7 @@ export const Signup = () => {
           value={creds.password}
           onChange={handleChanges}
         />
-        <button>submit</button>
+        <button>SUBMIT</button>
       </form>
     </div>
   );
