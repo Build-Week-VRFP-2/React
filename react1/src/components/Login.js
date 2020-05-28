@@ -1,42 +1,34 @@
 import React, { useState } from "react";
-import "../styling/Login.css";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { LoginI } from "./Logini";
+import { LoginA } from "./LoginA";
+
 
 export const Login = () => {
-  const [Lcreds, setLCreds] = useState({
-    username: "",
-    password: "",
-  });
-  const handleChanges = (e) => {
-    setLCreds({
-      ...Lcreds,
-      [e.target.name]: e.target.value,
-    });
+  const [investor, setInvestor] = useState(true);
+  const [applicant, setApplicant] = useState(false);
+
+  const handleToggleI = (e) => {
+    setApplicant(false);
+    setInvestor(true);
   };
+
+  const handleToggleA = (e) => {
+    setInvestor(false);
+    setApplicant(true);
+  };
+
   return (
-    <div className="logins">
-      <form>
-        <input
-          className="f2"
-          type="text"
-          placeholder="username"
-          name="username"
-          value={Lcreds.username}
-          onChange={handleChanges}
-        />
-        <br />
-        <br />
-        <input
-          className="f1"
-          type="text"
-          placeholder="password"
-          name="password"
-          value={Lcreds.password}
-          onChange={handleChanges}
-        />
-        <button>submit</button>
-        <span> Don't have an account?</span> <Link className='Log' to="/signup">sign up here</Link>
-      </form>
+    <div className="signup">
+      <div>
+        <ul className="links">
+          <li>
+            <span onClick={handleToggleI} className={investor ? "toggleOn" : "toggleOff"} to="/signup/investor">investor</span>
+            <span onClick={handleToggleA} className={applicant ? "toggleOn" : "toggleOff"}>applicant</span>
+          </li>
+        </ul>
+      </div>
+      {investor ? <LoginI /> : <LoginA />}
+      <span> Don't have an account?</span> <Link className='Log' to="/signup">sign up here</Link>
     </div>
-  );
-};
+  )}
