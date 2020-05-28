@@ -6,6 +6,7 @@ export const LoginA = () => {
 	const [LAcreds, setLACreds] = useState({
 		username: '',
 		password: '',
+		error: '',
 	});
 
 	const handleChanges = (e) => {
@@ -23,18 +24,22 @@ export const LoginA = () => {
 			.post('/api/auth/applicant/login', LAcreds)
 			.then((res) => {
 				console.log(res);
-        localStorage.setItem('token', JSON.stringify(res.data.token));
-        history.push(`/applicant/${res.data.user}`)
+				localStorage.setItem('token', JSON.stringify(res.data.token));
+				history.push(`/applicant/${res.data.user}`)
 			})
-      .catch((err) => console.log(err.response.data.errorMessage));
-      
-      
-      
+			.catch(err => {
+				if (err) {
+					setLACreds({ ...LAcreds, error: err.response.data.errorMessage })
+				}
+			});
 	};
 
 	return (
 		<div>
 			<form onSubmit={login}>
+				{
+					LAcreds.error ? <p>{LAcreds.error}</p> : null
+				}
 				<input
 					className="f2"
 					type="text"
