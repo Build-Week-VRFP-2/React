@@ -1,48 +1,53 @@
 import React, { useState } from "react";
-import Axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWIthAuth";
+import { useHistory } from "react-router-dom";
 
-export const ApplicantSignIn = () => {
-  const [Acreds, setACreds] = useState({
+export const LoginI = () => {
+  const [Lcreds, setLCreds] = useState({
     username: "",
     password: "",
   });
 
   const handleChanges = (e) => {
-    setACreds({
-      ...Acreds,
+    setLCreds({
+      ...Lcreds,
       [e.target.name]: e.target.value,
     });
   };
 
-  const submit = (e) => {
+  let history = useHistory();
+
+  const login = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/api/auth/applicant/register", Acreds)
+      .post("/api/auth/investor/login", Lcreds)
       .then((res) => {
         console.log(res);
-      });
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+      })
+      
+    console.log("invest login", Lcreds);
   };
 
   return (
     <div>
-      <form onSubmit={submit}>
+      <form onSubmit={login}>
         <input
           className="f2"
           type="text"
           placeholder="username"
           name="username"
-          value={Acreds.username}
+          value={Lcreds.username}
           onChange={handleChanges}
         />
         <br />
         <br />
         <input
           className="f1"
-          type="password"
+          type="text"
           placeholder="password"
           name="password"
-          value={Acreds.password}
+          value={Lcreds.password}
           onChange={handleChanges}
         />
         <button>submit</button>

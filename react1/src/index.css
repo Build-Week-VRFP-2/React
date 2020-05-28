@@ -57,6 +57,14 @@ button {
   margin-top: 220px;
 }
 
+.newproj {
+  border: 1px solid silver;
+  max-width: 550px;
+  height: 500px;
+  text-align: center;
+  
+}
+
 .f1 {
   font-size: 16px;
   width: 80%;
@@ -70,6 +78,14 @@ button {
   padding: 2.5%;
   font-family: "Raleway", sans-serif;
   margin-top: 50px;
+}
+
+.f3 {
+  font-size: 10px;
+  width: 80%;
+  padding: 2.5%;
+  font-family: "Raleway", sans-serif;
+  margin-top: 30px;
 }
 
 .logins {

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import "../styling/Signup.css";
+import Axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWIthAuth";
+import { useHistory } from "react-router-dom";
 
 export const InvestorSignIn = () => {
   const [Icreds, setICreds] = useState({
@@ -13,9 +15,25 @@ export const InvestorSignIn = () => {
     });
   };
 
+
+
+  const submit = (e) => {
+    e.preventDefault();
+    console.log('investor creds', Icreds)
+
+    axiosWithAuth()
+      .post("/api/auth/investor/register", Icreds)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+      
+
+  };
+
   return (
-    <div className="signup">
-      <form>
+    <div>
+      <form onSubmit={submit}>
         <input
           className="f2"
           type="text"
@@ -39,5 +57,3 @@ export const InvestorSignIn = () => {
     </div>
   );
 };
-
-
