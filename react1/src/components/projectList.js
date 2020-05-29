@@ -1,19 +1,15 @@
-import React from 'react'
+import React from "react";
 
-const ProjectList = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+export const ProjectList = (props) => {
+  return (
+    <div className='view'>
+      <p>{props.data.name}</p>
+      <p>{props.data.description}</p>
+      <p>{props.data.background}</p>
+      <p>{props.data.city}</p>
+      <p>{props.data.state}</p>
+    </div>
+  );
+};
 
-const mapStateToProps = state => {
-    return {
-        isLoading: state.isLoading,
-        projects: state.projects
-        error: state.error
-    }
-}
 
-export default connect(mapStateToProps, {getProjects})(ProjectList);

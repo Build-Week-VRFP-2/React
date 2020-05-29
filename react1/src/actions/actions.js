@@ -6,36 +6,34 @@ export const FetchProjects = (id) => dispatch => {
   axiosWithAuth()
   .get(`/api/applicant/${id}/projects`)
   .then(res => {
-    console.log(res);
+    console.log(res.data);
     dispatch({ type: "SUCCESS", payload: res.data });
   })
   .catch((err) => console.log(err.response));
 };
 
 
-
-export const postProject = (id, data) => {
+export const getprojects = () => dispatch => {
+  dispatch ({ type: "GETALLPROJECTS" });
   axiosWithAuth()
-  .post(`/api/applicant/${id}/project`, data)
-  .then(res => {
-    console.log(res);
-  })
-  .catch((err) => console.log(err.response));
+    .get(`/api/applicant/projects`)
+    .then(res => {
+      console.log(res.data);
+      dispatch({ type: "SUCCESSALL", payload: res.data });
+    })
+    .catch(err => console.error(err.response));
+};
 
-}
+export const getproject = (id, projectid) => dispatch => {
+  dispatch ({ type: "GETPROJECT" });
+  axiosWithAuth()
+    .get(`/api/applicant/${id}/project/${projectid}`)
+    .then(res => {
+      dispatch({ type: "SUCCESSONE", payload: res.data });
+    })
+    .catch(err => console.error(err));
+};
 
-
-
-// export const getprojects = () => dispatch => {
-//   dispatch ({ type: "GETPROJECTS" });
-//   axiosWithAuth()
-//     .get(`/api/applicants/projects`)
-//     .then(res => {
-//       console.log(res.data);
-//       dispatch({ type: "SUCCESS", payload: res.data });
-//     })
-//     .catch(err => console.error(err));
-// };
 
 
 

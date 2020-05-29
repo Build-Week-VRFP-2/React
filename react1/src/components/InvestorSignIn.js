@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWIthAuth";
 import { useHistory } from "react-router-dom";
 
 export const InvestorSignIn = () => {
+  let history = useHistory()
   const [Icreds, setICreds] = useState({
     username: "",
     password: "",
@@ -15,20 +15,15 @@ export const InvestorSignIn = () => {
     });
   };
 
-
-
   const submit = (e) => {
     e.preventDefault();
-    console.log('investor creds', Icreds)
-
     axiosWithAuth()
       .post("/api/auth/investor/register", Icreds)
       .then((res) => {
         console.log(res);
+        history.push('/login')
       })
       .catch((err) => console.log(err));
-      
-
   };
 
   return (
@@ -52,7 +47,7 @@ export const InvestorSignIn = () => {
           value={Icreds.password}
           onChange={handleChanges}
         />
-        <button>submit</button>
+        <button className='button1'>Sign up!</button>
       </form>
     </div>
   );

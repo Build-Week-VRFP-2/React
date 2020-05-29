@@ -47,13 +47,13 @@ export const LoginA = () => {
 				<br />
 				<input
 					className="f1"
-					type="text"
+					type="password"
 					placeholder="password"
 					name="password"
 					value={LAcreds.password}
 					onChange={handleChanges}
 				/>
-				<button>submit</button>
+				<button className='button1'>Sign in!</button>
 			</form>
 		</div>
 	);

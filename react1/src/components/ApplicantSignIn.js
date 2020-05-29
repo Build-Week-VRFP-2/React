@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWIthAuth";
+import { useHistory } from "react-router-dom";
 
 export const ApplicantSignIn = () => {
+  let history = useHistory()
   const [Acreds, setACreds] = useState({
     username: "",
     password: "",
@@ -21,6 +22,7 @@ export const ApplicantSignIn = () => {
       .post("/api/auth/applicant/register", Acreds)
       .then((res) => {
         console.log(res);
+        history.push('/login')
       });
   };
 
@@ -45,7 +47,7 @@ export const ApplicantSignIn = () => {
           value={Acreds.password}
           onChange={handleChanges}
         />
-        <button>submit</button>
+        <button className='button1'>Sign up!</button>
       </form>
     </div>
   );

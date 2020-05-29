@@ -1,14 +1,13 @@
-import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import { FetchProjects } from "../actions/actions";
+import { getproject } from "../actions/actions";
 import { axiosWithAuth } from "../utils/axiosWIthAuth";
-import  Projects from "./Projects";
+import { useHistory, Redirect } from "react-router-dom";
 
-
-const DashBoard = (props) => {
-  const { id } = useParams();
+const UpdateForm = (props) => {
+  let { id, itemid } = useParams();
+  let history = useHistory();
 
   const [data, setData] = useState({
     name: "",
@@ -26,25 +25,37 @@ const DashBoard = (props) => {
     });
   };
 
+  console.log(data);
+
   useEffect(() => {
-    props.FetchProjects(id);
+    props.getproject(id, itemid);
   }, []);
 
-  const submit = (e) => {
-	e.preventDefault();
-	console.log('data to submit', data)
+  console.log(props.project);
+
+  const handleDelete = (e) => {
     axiosWithAuth()
-      .post(`/api/applicant/${id}/project`, data)
+      .delete(`/api/applicant/${id}/project/${itemid}`)
       .then((res) => {
-		console.log(res);
-		
+        console.log(res);
+        history.push(`/applicant/${id}`);
       })
-	  .catch((err) => console.log(err.response.data));
-	  
+      .catch((err) => console.log(err.response.data));
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .put(`/api/applicant/${id}/project/${itemid}`, data)
+      .then((res) => {
+        console.log(res);
+        history.push(`/applicant/${id}`);
+      })
+      .catch((err) => console.log(err.response.data));
   };
 
   return (
-    <div className='cont1'>
+    <div className="cont1">
       <div className="newproj">
         <form onSubmit={submit}>
           <input
@@ -52,7 +63,7 @@ const DashBoard = (props) => {
             className="f3"
             value={data.name}
             name="name"
-            placeholder="name"
+            placeholder={props.project.name}
             onChange={handleChanges}
           />
           <input
@@ -60,7 +71,7 @@ const DashBoard = (props) => {
             className="f3"
             value={data.description}
             name="description"
-            placeholder="description"
+            placeholder={props.project.description}
             onChange={handleChanges}
           />
           <input
@@ -68,7 +79,7 @@ const DashBoard = (props) => {
             className="f3"
             value={data.background}
             name="background"
-            placeholder="background"
+            placeholder={props.project.background}
             onChange={handleChanges}
           />
           <input
@@ -76,7 +87,7 @@ const DashBoard = (props) => {
             className="f3"
             value={data.city}
             name="city"
-            placeholder="city"
+            placeholder={props.project.city}
             onChange={handleChanges}
           />
           <input
@@ -84,7 +95,7 @@ const DashBoard = (props) => {
             className="f3"
             value={data.state}
             name="state"
-            placeholder="state"
+            placeholder={props.project.state}
             onChange={handleChanges}
           />
           <input
@@ -95,19 +106,15 @@ const DashBoard = (props) => {
             placeholder="image_url"
             onChange={handleChanges}
           />
-          <button className='button1' type="submit">Make Project</button>
+          <div className='cont1'>
+          <button className="button2" type="submit">
+            update Project
+          </button>
+          <button onClick={handleDelete} className="button2" type="submit">
+            delete 
+          </button>
+          </div>
         </form>
-      </div>
-
-      <div className='projects'>
-        {props.projects.map((item) => {
-          return (
-            <div key={item.id}>
-              <Projects data={item} key={item.id} />
-			  </div>
-          );
-        })}
-		
       </div>
     </div>
   );
@@ -115,9 +122,9 @@ const DashBoard = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.isLoading,
-    projects: state.projects,
+    fetching: state.isLoading,
+    project: state.project,
   };
 };
 
-export default connect(mapStateToProps, { FetchProjects })(DashBoard);
+export default connect(mapStateToProps, { getproject })(UpdateForm);

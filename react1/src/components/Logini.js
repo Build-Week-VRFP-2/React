@@ -24,8 +24,9 @@ export const LoginI = () => {
       .then((res) => {
         console.log(res);
         localStorage.setItem("token", JSON.stringify(res.data.token));
-      })
-      
+        history.push('/projects')
+      });
+
     console.log("invest login", Lcreds);
   };
 
@@ -44,13 +45,13 @@ export const LoginI = () => {
         <br />
         <input
           className="f1"
-          type="text"
+          type="password"
           placeholder="password"
           name="password"
           value={Lcreds.password}
           onChange={handleChanges}
         />
-        <button>submit</button>
+        <button className='button1'>Sign in!</button>
       </form>
     </div>
   );
