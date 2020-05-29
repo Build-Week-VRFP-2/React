@@ -6,6 +6,7 @@ export const LoginI = () => {
   const [Lcreds, setLCreds] = useState({
     username: "",
     password: "",
+    error: "",
   });
 
   const handleChanges = (e) => {
@@ -22,16 +23,22 @@ export const LoginI = () => {
     axiosWithAuth()
       .post("/api/auth/investor/login", Lcreds)
       .then((res) => {
-        console.log(res);
+        console.log(res.status);
         localStorage.setItem("token", JSON.stringify(res.data.token));
       })
-      
-    console.log("invest login", Lcreds);
+      .catch (err => {
+         if (err){
+          setLCreds({...Lcreds, error: "Invalid email or password"})
+        }
+      })
   };
 
   return (
     <div>
       <form onSubmit={login}>
+        {
+          Lcreds.error ? <p>{Lcreds.error}</p> : null
+        }
         <input
           className="f2"
           type="text"
@@ -39,6 +46,7 @@ export const LoginI = () => {
           name="username"
           value={Lcreds.username}
           onChange={handleChanges}
+          required
         />
         <br />
         <br />
@@ -49,6 +57,7 @@ export const LoginI = () => {
           name="password"
           value={Lcreds.password}
           onChange={handleChanges}
+          required
         />
         <button>submit</button>
       </form>
