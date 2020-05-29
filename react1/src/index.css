@@ -12,12 +12,26 @@ code {
     monospace;
 }
 
+.navcontainer {
+  display: flex;
+  justify-content: flex-end;
+  background-color: teal;
+}
+
 .navbar {
   display: flex;
-  justify-content: space-evenly;
-  font-size: 24px;
-  border: 1px solid black;
+  justify-content: space-between;
   font-family: "Open Sans", sans-serif;
+  color: white;
+  background-color: teal;
+  margin: 0 8%; 
+  padding: 1.3% 0;
+  width: 20%;
+}
+
+.navLinks {
+  font-size: 18px;
+  color: white;
 }
 
 .links li {
@@ -38,14 +52,14 @@ a {
 button {
   display: block;
   margin: auto;
-  width: 300px;
+  width: 260px;
   height: 60px;
   color: white;
-  font-size: 16px;
+  font-size: 21px;
   font-family: "Raleway", sans-serif;
-  margin-top: 40px;
+  margin: 40px auto 20px auto;
   background: teal;
-  border-radius: 100px;
+  border-radius: 10px;
 }
 
 .signup {
@@ -54,7 +68,7 @@ button {
   max-width: 550px;
   height: 400px;
   text-align: center;
-  margin-top: 220px;
+  margin-top: 8%;
 }
 
 .newproj {
@@ -95,10 +109,6 @@ button {
   height: 400px;
   text-align: center;
   margin-top: 220px;
-}
-
-.navbar a {
-  color: black;
 }
 
 .Log {
